@@ -8,7 +8,6 @@ from ..backend import resources
 @pytest.mark.parametrize(
     "text, float_output, expected",
     [
-        # Empty/simple text now clamps to minimum grade level (1.0)
         (resources.EMPTY_STR, True, 1.0),
         (resources.EMPTY_STR, False, "0th and 1st grade"),
         (resources.EASY_TEXT, True, 4.0),
