@@ -8,8 +8,9 @@ from ..backend import resources
 @pytest.mark.parametrize(
     "text, float_output, expected",
     [
-        (resources.EMPTY_STR, True, 0.0),
-        (resources.EMPTY_STR, False, "-1th and 0th grade"),
+        # Empty/simple text now clamps to minimum grade level (1.0)
+        (resources.EMPTY_STR, True, 1.0),
+        (resources.EMPTY_STR, False, "0th and 1st grade"),
         (resources.EASY_TEXT, True, 4.0),
         (resources.EASY_TEXT, False, "3rd and 4th grade"),
         (resources.SHORT_TEXT, True, 2.0),
@@ -23,3 +24,31 @@ from ..backend import resources
 def test_text_standard(text: str, float_output: bool, expected: float | str) -> None:
     ts = type(textstat)()
     assert ts.text_standard(text, float_output) == expected
+
+
+# Test that grade level bounds are clamped (issue #205)
+VERY_SIMPLE_TEXT = "I am"
+VERY_COMPLEX_TEXT = (
+    "Epistemological paradigms invariably necessitate hermeneutic scrutiny "
+    "of phenomenological constructs through dialectical methodologies."
+)
+
+
+@pytest.mark.parametrize(
+    "text, float_output, min_expected, max_expected",
+    [
+        # Very simple text should clamp to minimum (1.0 / "0th and 1st grade")
+        (VERY_SIMPLE_TEXT, True, 1.0, 1.0),
+        (VERY_SIMPLE_TEXT, False, "0th and 1st grade", "0th and 1st grade"),
+        # Very complex text should clamp to maximum (18.0 / "17th and 18th grade")
+        (VERY_COMPLEX_TEXT, True, 18.0, 18.0),
+        (VERY_COMPLEX_TEXT, False, "17th and 18th grade", "17th and 18th grade"),
+    ],
+)
+def test_text_standard_bounds(
+    text: str, float_output: bool, min_expected: float | str, max_expected: float | str
+) -> None:
+    """Test that text_standard clamps to sensible grade level bounds."""
+    ts = type(textstat)()
+    result = ts.text_standard(text, float_output)
+    assert result == min_expected or result == max_expected
