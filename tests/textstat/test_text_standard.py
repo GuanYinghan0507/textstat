@@ -27,7 +27,7 @@ def test_text_standard(text: str, float_output: bool, expected: float | str) -> 
 
 
 # Test that grade level bounds are clamped (issue #205)
-VERY_SIMPLE_TEXT = "I am"
+VERY_SIMPLE_TEXT = "I am simple"
 VERY_COMPLEX_TEXT = (
     "Epistemological paradigms invariably necessitate hermeneutic scrutiny "
     "of phenomenological constructs through dialectical methodologies."

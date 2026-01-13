@@ -985,8 +985,7 @@ class textstatistics:
         down and up, respectively.
 
         The output is clamped to sensible educational grade bounds: 1-18
-        (kindergarten through graduate school). This prevents nonsensical
-        outputs like "-1th and 0th grade" for very simple text.
+        (kindergarten through graduate school).
 
         Parameters
         ----------
