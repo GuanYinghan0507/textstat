@@ -984,6 +984,10 @@ class textstatistics:
         "XX and YY grade" where XX and YY are gotten by rounding the float value
         down and up, respectively.
 
+        The output is clamped to sensible educational grade bounds: 1-18
+        (kindergarten through graduate school). This prevents nonsensical
+        outputs like "-1th and 0th grade" for very simple text.
+
         Parameters
         ----------
         text : str
@@ -997,6 +1001,8 @@ class textstatistics:
             The Text Standard for `text`.
         """
         standard_value = metrics.text_standard(text, self.__lang)
+        # Clamp to sensible educational grade bounds (K through graduate school)
+        standard_value = max(1, min(standard_value, 18))
         if float_output:
             return self._legacy_round(standard_value)
         else:
