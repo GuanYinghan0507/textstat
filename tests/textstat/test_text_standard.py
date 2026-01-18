@@ -25,23 +25,20 @@ def test_text_standard(text: str, float_output: bool, expected: float | str) -> 
     assert ts.text_standard(text, float_output) == expected
 
 
-# Test that grade level bounds are clamped (issue #205)
-VERY_SIMPLE_TEXT = "I am simple"
-VERY_COMPLEX_TEXT = (
-    "Epistemological paradigms invariably necessitate hermeneutic scrutiny "
-    "of phenomenological constructs through dialectical methodologies."
-)
-
-
 @pytest.mark.parametrize(
     "text, float_output, min_expected, max_expected",
     [
         # Very simple text should clamp to minimum (1.0 / "0th and 1st grade")
-        (VERY_SIMPLE_TEXT, True, 1.0, 1.0),
-        (VERY_SIMPLE_TEXT, False, "0th and 1st grade", "0th and 1st grade"),
+        (resources.VERY_SIMPLE_TEXT, True, 1.0, 1.0),
+        (resources.VERY_SIMPLE_TEXT, False, "0th and 1st grade", "0th and 1st grade"),
         # Very complex text should clamp to maximum (18.0 / "17th and 18th grade")
-        (VERY_COMPLEX_TEXT, True, 18.0, 18.0),
-        (VERY_COMPLEX_TEXT, False, "17th and 18th grade", "17th and 18th grade"),
+        (resources.VERY_COMPLEX_TEXT, True, 18.0, 18.0),
+        (
+            resources.VERY_COMPLEX_TEXT,
+            False,
+            "17th and 18th grade",
+            "17th and 18th grade",
+        ),
     ],
 )
 def test_text_standard_bounds(
