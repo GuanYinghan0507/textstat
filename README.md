@@ -1,3 +1,6 @@
+> 本仓库是《软件测试与质量保证实践》课程作业仓库，被测对象为 textstat 0.7.7。
+> 作业说明、目录结构、环境配置和测试运行方式见 [assignment/README.md](assignment/README.md)。
+
 # Textstat
 
 [![PyPI](https://img.shields.io/pypi/v/textstat.svg)](https://pypi.org/project/textstat/)
@@ -504,4 +507,3 @@ $ # Make changes
 
 $ python -m pytest test.py  # Run tests
 ```
-
