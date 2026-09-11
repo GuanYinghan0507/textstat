@@ -1,0 +1,174 @@
+{
+  "suite": "metrics",
+  "author": "韩迎小",
+  "target": "textstat readability metrics",
+  "total_cases": 20,
+  "status_counts": {
+    "OK": 14,
+    "POK": 2,
+    "NG": 3,
+    "NT": 1
+  },
+  "cases": [
+    {
+      "case_id": "TEXTSTAT-ST-RM-001",
+      "function": "flesch_reading_ease",
+      "input": "Cool dogs wear da sunglasses.",
+      "lang": "en_US",
+      "expected": 83.32,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-002",
+      "function": "smog_index",
+      "input": "Playing games has always been thought to be important to the development of well-balanced and creative children; however, what part, if any, they should play in the lives of adults has never been researched that deeply. I believe that playing games is every bit as important for adults as for children. Not only is it taking time out to play games with our children and other adults valuable to building interpersonal relationships but is also a wonderful way to release built up tension.",
+      "lang": "en_US",
+      "expected": 14.068,
+      "status": "POK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-003",
+      "function": "flesch_kincaid_grade",
+      "input": "Cool dogs wear da sunglasses.",
+      "lang": "en_US",
+      "expected": 2.88,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-004",
+      "function": "coleman_liau_index",
+      "input": "Cool dogs wear da sunglasses.",
+      "lang": "en_US",
+      "expected": 6.12,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-005",
+      "function": "automated_readability_index",
+      "input": "Hi. How are you?",
+      "lang": "en_US",
+      "expected": -1.59,
+      "status": "NG"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-006",
+      "function": "dale_chall_readability_score",
+      "input": "Cool dogs wear da sunglasses.",
+      "lang": "en_US",
+      "expected": 13.358,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-007",
+      "function": "difficult_words",
+      "input": "I am simple text",
+      "lang": "en_US",
+      "expected": 0,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-008",
+      "function": "text_standard",
+      "input": "I am simple text",
+      "lang": "en_US",
+      "expected": "0th and 1st grade",
+      "status": "POK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-009",
+      "function": "linsear_write_formula",
+      "input": "Anna and her family love doing puzzles. Anna is best at little puzzles. Anna and her brother work on medium size puzzles together. Anna's Brother likes puzzles with cars in them. When the whole family does a puzzle, they do really big puzzles. It can take them a week to finish a really big puzzle. Last year they did a puzzle with 500 pieces! Anna tries to finish one small puzzle a day by her. Her puzzles have about 50 pieces. They all glue their favorite puzzles together and frame them. The puzzles look so nice on the wall. End.",
+      "lang": "en_US",
+      "expected": 4.091,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-010",
+      "function": "gunning_fog",
+      "input": "Cool dogs wear da sunglasses.",
+      "lang": "en_US",
+      "expected": 10.0,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-011",
+      "function": "flesch_reading_ease",
+      "input": "这是一个用于可读性测试的中文句子。",
+      "lang": "zh_CN",
+      "expected": null,
+      "status": "NT"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-012",
+      "function": "fernandez_huerta",
+      "input": "Hoy es un lindo día",
+      "lang": "es_ES",
+      "expected": 129.74,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-013",
+      "function": "szigriszt_pazos",
+      "input": "Hoy es un lindo día",
+      "lang": "es_ES",
+      "expected": 127.08,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-014",
+      "function": "gutierrez_polini",
+      "input": "Hoy es un lindo día",
+      "lang": "es_ES",
+      "expected": 64.35,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-015",
+      "function": "sentence_count",
+      "input": "The meeting was led by Dr. Smith at 3.14 p.m. We left after lunch.",
+      "lang": "en_US",
+      "expected": 2,
+      "status": "NG"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-016",
+      "function": "crawford",
+      "input": "Hoy es un lindo día",
+      "lang": "es_ES",
+      "expected": -1.627,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-017",
+      "function": "gulpease_index",
+      "input": "Roma è un comune italiano, capitale della Repubblica Italiana, nonché capoluogo dell'omonima città metropolitana e della regione Lazio.",
+      "lang": "it_IT",
+      "expected": 40.111,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-018",
+      "function": "osman",
+      "input": "ذهب هند وأحمد الى المدرسة. هند تحب الرسم والمطالعة",
+      "lang": "ar_AR",
+      "expected": 102.186,
+      "status": "OK"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-019",
+      "function": "difficult_words",
+      "input": "Scotland returned. The giants strongest form was giant's.",
+      "lang": "en_US",
+      "expected": 0,
+      "status": "NG"
+    },
+    {
+      "case_id": "TEXTSTAT-ST-RM-020",
+      "function": "sentence_count",
+      "input": "This is a sentence. This is another sentence.",
+      "lang": "en_US",
+      "expected": 2,
+      "status": "OK"
+    }
+  ]
+}
