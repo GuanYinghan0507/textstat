@@ -16,8 +16,8 @@ assignment/module1/tests/
 │   ├── test_long_word_count.py
 │   ├── test_monosyllabcount.py
 │   └── test_polysyllabcount.py
-├── metrics_test_data.json      # 成员 B：20 条可读性指标用例数据
-└── metrics/                    # 成员 B：16 个可读性指标函数与句数依赖用例
+├── metrics_test_data.json      # 韩迎小：20 条可读性指标用例数据
+└── metrics/                    # 韩迎小：16 个可读性指标函数与句数依赖用例
     ├── conftest.py
     ├── metrics_helpers.py
     ├── test_metrics_flesch_reading_ease.py
@@ -70,9 +70,9 @@ assignment/module1/tests/
 | TC-A-020 ~ TC-A-021 | `monosyllabcount` | `count/test_monosyllabcount.py` |
 | TC-A-022 ~ TC-A-023 | `polysyllabcount` | `count/test_polysyllabcount.py` |
 
-## 用例与脚本对照（成员 B：可读性指标）
+## 用例与脚本对照（韩迎小：可读性指标）
 
-成员 B 共 20 条用例，覆盖 16 项可读性指标函数及句数依赖边界。
+韩迎小 共 20 条用例，覆盖 16 项可读性指标函数及句数依赖边界。
 
 | 用例编号 | 被测函数/场景 | 脚本 |
 | --- | --- | --- |
@@ -96,7 +96,7 @@ assignment/module1/tests/
 
 用例清单见 `assignment/module1/test_cases/metrics_test_cases.xlsx`。
 
-## 成员 B 执行结果
+## 韩迎小 执行结果
 
 第一轮（textstat 0.7.7 原始代码）共执行 20 条：
 
@@ -124,7 +124,7 @@ assignment/module1/tests/
 
 ## 注意事项
 
-1. `count/` 与 `metrics/` 下的测试文件不能重名；成员 B 统一使用
+1. `count/` 与 `metrics/` 下的测试文件不能重名；韩迎小 统一使用
    `test_metrics_*.py` 前缀，避免 pytest 模块名冲突。
 2. `conftest.py` 放在 `tests/` 根目录，对两个子目录都生效；`metrics/conftest.py`
    额外负责测试前后重置语言设置。
