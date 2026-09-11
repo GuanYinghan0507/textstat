@@ -7,22 +7,41 @@ assignment/module1/tests/
 ├── conftest.py                 # 公共配置：把仓库根目录加入 sys.path，保证 import textstat
 ├── README.md                   # 本说明
 ├── count/                      # 成员 A：计数与预处理功能，24 条用例（TC-A-001 ~ TC-A-024）
-│   ├── test_char_count.py          TC-A-001 ~ TC-A-002
-│   ├── test_letter_count.py        TC-A-003 ~ TC-A-005
-│   ├── test_lexicon_count.py       TC-A-006 ~ TC-A-008
-│   ├── test_sentence_count.py      TC-A-009 ~ TC-A-011
-│   ├── test_syllable_count.py      TC-A-012 ~ TC-A-014
-│   ├── test_difficult_words.py     TC-A-015 ~ TC-A-017、TC-A-024
-│   ├── test_long_word_count.py     TC-A-018 ~ TC-A-019
-│   ├── test_monosyllabcount.py     TC-A-020 ~ TC-A-021
-│   └── test_polysyllabcount.py     TC-A-022 ~ TC-A-023
-└── metrics/                    # 成员 B：可读性指标功能，脚本与测试数据放这里
-    └── test_metrics_*.py           编号与 test_cases.xlsx 中 TEXTSTAT-ST-RM-nnn 对应
+│   ├── test_char_count.py
+│   ├── test_letter_count.py
+│   ├── test_lexicon_count.py
+│   ├── test_sentence_count.py
+│   ├── test_syllable_count.py
+│   ├── test_difficult_words.py
+│   ├── test_long_word_count.py
+│   ├── test_monosyllabcount.py
+│   └── test_polysyllabcount.py
+├── metrics_test_data.json      # 成员 B：20 条可读性指标用例数据
+└── metrics/                    # 成员 B：16 个可读性指标函数与句数依赖用例
+    ├── conftest.py
+    ├── metrics_helpers.py
+    ├── test_metrics_flesch_reading_ease.py
+    ├── test_metrics_smog_index.py
+    ├── test_metrics_flesch_kincaid_grade.py
+    ├── test_metrics_coleman_liau_index.py
+    ├── test_metrics_automated_readability_index.py
+    ├── test_metrics_dale_chall_readability_score.py
+    ├── test_metrics_difficult_words.py
+    ├── test_metrics_text_standard.py
+    ├── test_metrics_linsear_write_formula.py
+    ├── test_metrics_gunning_fog.py
+    ├── test_metrics_fernandez_huerta.py
+    ├── test_metrics_szigriszt_pazos.py
+    ├── test_metrics_gutierrez_polini.py
+    ├── test_metrics_sentence_count_metrics.py
+    ├── test_metrics_crawford.py
+    ├── test_metrics_gulpease_index.py
+    └── test_metrics_osman.py
 ```
 
 ## 一键运行
 
-在仓库根目录执行（收集并运行两个子目录下的全部用例）：
+在仓库根目录执行：
 
 ```bash
 .venv\Scripts\python -m pytest -v
@@ -51,25 +70,62 @@ assignment/module1/tests/
 | TC-A-020 ~ TC-A-021 | `monosyllabcount` | `count/test_monosyllabcount.py` |
 | TC-A-022 ~ TC-A-023 | `polysyllabcount` | `count/test_polysyllabcount.py` |
 
-用例清单见 `assignment/module1/test_cases/test_cases.xlsx`（成员 A 与成员 B 合并后的统一清单）。
+## 用例与脚本对照（成员 B：可读性指标）
 
-## 执行结果
+成员 B 共 20 条用例，覆盖 16 项可读性指标函数及句数依赖边界。
 
-第一轮（textstat 0.7.7 原始代码）：成员 A 的 24 条中 17 条完全通过（OK）、
-3 条部分通过（POK）、4 条失败（NG），失败与部分通过用例对应 3 个缺陷。
+| 用例编号 | 被测函数/场景 | 脚本 |
+| --- | --- | --- |
+| TEXTSTAT-ST-RM-001、011 | `flesch_reading_ease` | `metrics/test_metrics_flesch_reading_ease.py` |
+| TEXTSTAT-ST-RM-002 | `smog_index` | `metrics/test_metrics_smog_index.py` |
+| TEXTSTAT-ST-RM-003 | `flesch_kincaid_grade` | `metrics/test_metrics_flesch_kincaid_grade.py` |
+| TEXTSTAT-ST-RM-004 | `coleman_liau_index` | `metrics/test_metrics_coleman_liau_index.py` |
+| TEXTSTAT-ST-RM-005 | `automated_readability_index` | `metrics/test_metrics_automated_readability_index.py` |
+| TEXTSTAT-ST-RM-006 | `dale_chall_readability_score` | `metrics/test_metrics_dale_chall_readability_score.py` |
+| TEXTSTAT-ST-RM-007、019 | `difficult_words` | `metrics/test_metrics_difficult_words.py` |
+| TEXTSTAT-ST-RM-008 | `text_standard` | `metrics/test_metrics_text_standard.py` |
+| TEXTSTAT-ST-RM-009 | `linsear_write_formula` | `metrics/test_metrics_linsear_write_formula.py` |
+| TEXTSTAT-ST-RM-010 | `gunning_fog` | `metrics/test_metrics_gunning_fog.py` |
+| TEXTSTAT-ST-RM-012 | `fernandez_huerta` | `metrics/test_metrics_fernandez_huerta.py` |
+| TEXTSTAT-ST-RM-013 | `szigriszt_pazos` | `metrics/test_metrics_szigriszt_pazos.py` |
+| TEXTSTAT-ST-RM-014 | `gutierrez_polini` | `metrics/test_metrics_gutierrez_polini.py` |
+| TEXTSTAT-ST-RM-015、020 | `sentence_count` | `metrics/test_metrics_sentence_count_metrics.py` |
+| TEXTSTAT-ST-RM-016 | `crawford` | `metrics/test_metrics_crawford.py` |
+| TEXTSTAT-ST-RM-017 | `gulpease_index` | `metrics/test_metrics_gulpease_index.py` |
+| TEXTSTAT-ST-RM-018 | `osman` | `metrics/test_metrics_osman.py` |
 
-| 缺陷 | 涉及用例 | 状态 | 现象 |
-| --- | --- | --- | --- |
-| A1 | TC-A-013、TC-A-014、TC-A-017、TC-A-021、TC-A-023 | NG / POK | cmudict 未收录词或数字词抛出 `KeyError`，未回退 pyphen |
-| A2 | TC-A-005 | NG | `letter_count` 把数字与下划线计入字母数 |
-| A3 | TC-A-011 | NG | `sentence_count` 忽略单词数不大于 2 的短句 |
+用例清单见 `assignment/module1/test_cases/metrics_test_cases.xlsx`。
 
-第二轮（缺陷 A1 ~ A3 修复后回归）：成员 A 的 `24 passed`，全部用例完全通过。
+## 成员 B 执行结果
+
+第一轮（textstat 0.7.7 原始代码）共执行 20 条：
+
+```text
+3 failed, 16 passed, 1 skipped
+```
+
+附录状态分布：
+
+| 状态 | 数量 | 说明 |
+| --- | ---: | --- |
+| OK | 14 | 实际结果符合预期 |
+| POK | 2 | SMOG 最小样本可信度有限、Text Standard 下限标签存在语义争议 |
+| NG | 3 | 对应 ARI 句数依赖、缩写/小数分句、Dale-Chall 词形规则三个缺陷 |
+| NT | 1 | 当前版本未提供中文可读性指标基准 |
+
+| 状态 | 用例 | 现象 |
+| --- | --- | --- |
+| POK | TEXTSTAT-ST-RM-002 | SMOG 仅满足 3 句程序下限，低于规范建议的 30 句 |
+| POK | TEXTSTAT-ST-RM-008 | `text_standard` 下限返回 `0th and 1st grade` |
+| NG | TEXTSTAT-ST-RM-005 | 短句被少计，导致 ARI 实际值与预期值不一致 |
+| NG | TEXTSTAT-ST-RM-015 | 缩写及小数点被误判为句末，句数多计 |
+| NG | TEXTSTAT-ST-RM-019 | Dale-Chall 规则变形和所有格被误判为难词 |
+| NT | TEXTSTAT-ST-RM-011 | 中文场景缺少可执行的中文可读性指标基准 |
 
 ## 注意事项
 
-1. 两个子目录下的测试文件不要重名（pytest 默认按文件名区分模块），建议成员 B 统一用
-   `test_metrics_xxx.py` 命名。
-2. `conftest.py` 放在 `tests/` 根目录，对 `count/` 与 `metrics/` 两个子目录都生效；
-   成员 B 如需额外 fixture，可在 `metrics/` 下新增自己的 `conftest.py`。
+1. `count/` 与 `metrics/` 下的测试文件不能重名；成员 B 统一使用
+   `test_metrics_*.py` 前缀，避免 pytest 模块名冲突。
+2. `conftest.py` 放在 `tests/` 根目录，对两个子目录都生效；`metrics/conftest.py`
+   额外负责测试前后重置语言设置。
 3. `__pycache__`、`.pytest_cache` 已在 `.gitignore` 中，不会被提交。
