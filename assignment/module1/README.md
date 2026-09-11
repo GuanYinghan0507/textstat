@@ -22,17 +22,25 @@
 - `monosyllabcount`
 - `polysyllabcount`
 
-成员 B 负责可读性指标功能：
+韩迎小负责可读性指标功能及指标句数依赖，共覆盖 20 条测试用例：
 
 - `flesch_reading_ease`
-- `flesch_kincaid_grade`
 - `smog_index`
+- `flesch_kincaid_grade`
 - `coleman_liau_index`
 - `automated_readability_index`
 - `dale_chall_readability_score`
-- `gunning_fog`
+- `difficult_words`
 - `text_standard`
 - `linsear_write_formula`
+- `gunning_fog`
+- `fernandez_huerta`
+- `szigriszt_pazos`
+- `gutierrez_polini`
+- `sentence_count`（可读性指标句数依赖）
+- `crawford`
+- `gulpease_index`
+- `osman`
 
 ## 测试设计方法
 
