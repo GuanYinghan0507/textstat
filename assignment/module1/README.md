@@ -8,9 +8,32 @@
 4. 模块一测试报告（附录3 Word）
 5. 成果汇报 PPT 与演示视频
 
+## 测试用例清单
+
+最终合并用例清单见 [`test_cases/test_cases.xlsx`](test_cases/test_cases.xlsx)，共 44 条：
+
+- 管映涵：`TC-A-001` 至 `TC-A-024`
+- 韩迎小：`TEXTSTAT-ST-RM-001` 至 `TEXTSTAT-ST-RM-020`
+
+## 自动化测试运行说明
+
+自动化脚本位于 `tests/`，目录结构、用例与脚本对照及运行方式见 [`tests/README.md`](tests/README.md)。
+
+在仓库根目录执行：
+
+```bash
+python -m pytest -v
+```
+
+Windows 虚拟环境可执行：
+
+```powershell
+.venv\Scripts\python -m pytest -v
+```
+
 ## 测试范围
 
-成员 A 负责计数与预处理功能：
+管映涵负责计数与预处理功能：
 
 - `char_count`
 - `letter_count`
