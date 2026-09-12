@@ -6,7 +6,7 @@
 assignment/module1/tests/
 ├── conftest.py                 # 公共配置：把仓库根目录加入 sys.path，保证 import textstat
 ├── README.md                   # 本说明
-├── count/                      # 成员 A：计数与预处理功能，24 条用例（TC-A-001 ~ TC-A-024）
+├── count/                      # 管映涵：计数与预处理功能，24 条用例（TC-A-001 ~ TC-A-024）
 │   ├── test_char_count.py
 │   ├── test_letter_count.py
 │   ├── test_lexicon_count.py
@@ -39,24 +39,32 @@ assignment/module1/tests/
     └── test_metrics_osman.py
 ```
 
-## 一键运行
+最终合并测试用例清单见 [`../test_cases/test_cases.xlsx`](../test_cases/test_cases.xlsx)，共 44 条：管映涵 24 条、韩迎小 20 条。
+
+## 一键运行与结果判定
 
 在仓库根目录执行：
 
 ```bash
+python -m pytest -v
+```
+
+Windows 虚拟环境可执行：
+
+```powershell
 .venv\Scripts\python -m pytest -v
 ```
 
-只运行某个成员的用例：
+该命令会同时收集 `count/` 和 `metrics/` 下的全部测试。
 
-```bash
-.venv\Scripts\python -m pytest assignment/module1/tests/count -v
-.venv\Scripts\python -m pytest assignment/module1/tests/metrics -v
-```
+NG 用例处理说明：
 
-`pytest.ini` 已配置 `testpaths = assignment`、`python_files = test_*.py`，因此无需指定文件名或逐个运行。
+- OK、POK 用例按预期通过。
+- NG 用例是已知缺陷的复现用例，当前脚本不将其标记为 `xfail`，在 textstat 0.7.7 原始版本上会显示为 `failed`。因此全量运行出现失败项并返回非零退出码，属于缺陷验证的预期结果，应结合缺陷报告说明，不应通过修改断言把 NG 强行改成通过。
+- NT 用例通过 `pytest.skip` 跳过，并记录跳过原因。
+- 如果现场演示需要退出码为 0 的结果，应先将 NG 用例改为 `xfail`，或单独运行 OK/POK 用例；本次说明按当前脚本的实际处理方式记录。
 
-## 用例与脚本对照（成员 A：计数与预处理）
+## 用例与脚本对照（管映涵：计数与预处理）
 
 | 用例编号 | 被测函数 | 脚本 |
 | --- | --- | --- |
@@ -72,7 +80,7 @@ assignment/module1/tests/
 
 ## 用例与脚本对照（韩迎小：可读性指标）
 
-韩迎小 共 20 条用例，覆盖 16 项可读性指标函数及句数依赖边界。
+韩迎小共 20 条用例，覆盖 16 项可读性指标函数及句数依赖边界。
 
 | 用例编号 | 被测函数/场景 | 脚本 |
 | --- | --- | --- |
@@ -94,9 +102,7 @@ assignment/module1/tests/
 | TEXTSTAT-ST-RM-017 | `gulpease_index` | `metrics/test_metrics_gulpease_index.py` |
 | TEXTSTAT-ST-RM-018 | `osman` | `metrics/test_metrics_osman.py` |
 
-用例清单见 `assignment/module1/test_cases/metrics_test_cases.xlsx`。
-
-## 韩迎小 执行结果
+## 可读性指标部分历史执行结果（韩迎小）
 
 第一轮（textstat 0.7.7 原始代码）共执行 20 条：
 
@@ -124,8 +130,6 @@ assignment/module1/tests/
 
 ## 注意事项
 
-1. `count/` 与 `metrics/` 下的测试文件不能重名；韩迎小 统一使用
-   `test_metrics_*.py` 前缀，避免 pytest 模块名冲突。
-2. `conftest.py` 放在 `tests/` 根目录，对两个子目录都生效；`metrics/conftest.py`
-   额外负责测试前后重置语言设置。
+1. `count/` 与 `metrics/` 下的测试文件不能重名；韩迎小统一使用 `test_metrics_*.py` 前缀，避免 pytest 模块名冲突。
+2. `conftest.py` 放在 `tests/` 根目录，对两个子目录都生效；`metrics/conftest.py` 额外负责测试前后重置语言设置。
 3. `__pycache__`、`.pytest_cache` 已在 `.gitignore` 中，不会被提交。
