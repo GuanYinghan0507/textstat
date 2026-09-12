@@ -4,7 +4,7 @@
 
 - 操作系统：Windows
 - 终端：PowerShell
-- 日期：2026-09-10
+- 文档更新日期：2026-09-12
 
 ## Python 环境
 
@@ -16,7 +16,8 @@
 
 - 项目：textstat
 - 作业分支：`assignment`
-- Git tag：`0.7.7`
+- 基线版本：textstat 0.7.7（Git tag 0.7.7）
+- 说明：源码中的 `__version__` 或包元数据可能保留上游内部版本号，本作业版本以 Git tag 0.7.7 和仓库提交历史为准。
 
 ## 依赖与测试框架
 
@@ -28,16 +29,16 @@
 | pyphen | 已安装 |
 | cmudict | 已安装 |
 
-安装命令：
+## 安装命令
 
-```bash
+```powershell
 .venv\Scripts\python -m pip install -r requirements.txt
 .venv\Scripts\python -m pip install -r assignment\requirements.txt
 ```
 
-## 环境验证命令与输出
+## 环境验证
 
-```bash
+```powershell
 .venv\Scripts\python -c "import textstat, pyphen, cmudict, pytest; print('env ok')"
 ```
 
@@ -47,33 +48,28 @@
 env ok
 ```
 
-```bash
-.venv\Scripts\python -c "import textstat; print('textstat version:', getattr(textstat, '__version__', 'unknown'))"
-```
-
-输出：
-
-```text
-textstat version: (0, 7, 6)
-```
-
-```bash
-.venv\Scripts\python -m pytest -v
-```
-
-输出：
-
-```text
-collected 0 items
-no tests ran
-```
-
-当前测试目录还没有用例，因此 pytest 收集结果为 0 条。
-
 ## 测试运行方式
 
 在仓库根目录执行：
 
-```bash
+```powershell
 .venv\Scripts\python -m pytest -v
 ```
+
+该命令会同时收集 `assignment/module1/tests/count/` 和 `assignment/module1/tests/metrics/` 下的全部测试。
+
+## 当前测试结果统计
+
+最终合并测试用例清单见 `assignment/module1/test_cases/test_cases.xlsx`，共 44 条：
+
+- 管映涵：24 条（`TC-A-001` 至 `TC-A-024`）
+- 韩迎小：20 条（`TEXTSTAT-ST-RM-001` 至 `TEXTSTAT-ST-RM-020`）
+
+| 状态 | 数量 | 说明 |
+| --- | ---: | --- |
+| OK | 31 | 实际结果符合预期 |
+| POK | 5 | 部分通过，需结合备注和测试报告说明 |
+| NG | 7 | 已知缺陷复现用例；在当前原始版本上会显示为失败，属于预期结果 |
+| NT | 1 | 当前版本未提供可执行基准，运行时会跳过 |
+
+全量运行 `pytest` 时可能出现失败项并返回非零退出码，原因是 NG 用例未被标记为 `xfail`；这是缺陷验证结果，不应被误判为测试环境故障。
