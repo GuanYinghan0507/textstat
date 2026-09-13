@@ -23,4 +23,6 @@ def count_letters(text: str) -> int:
     """
     # Ignore spaces
     text = re.sub(r"\s", "", text)
+    # 数字与下划线同属 \w，但不是字母，需一并剔除
+    text = re.sub(r"[\d_]", "", text)
     return len(remove_punctuation(text, rm_apostrophe=True))
