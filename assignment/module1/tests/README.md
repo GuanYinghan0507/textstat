@@ -78,6 +78,50 @@ NG 用例处理说明：
 | TC-A-020 ~ TC-A-021 | `monosyllabcount` | `count/test_monosyllabcount.py` |
 | TC-A-022 ~ TC-A-023 | `polysyllabcount` | `count/test_polysyllabcount.py` |
 
+## 计数与预处理部分历史执行结果（管映涵）
+
+第一轮（textstat 0.7.7 原始代码）共执行 24 条：
+
+```text
+7 failed, 17 passed
+```
+
+说明：3 条 POK 用例内部既有通过断言也有失败断言，pytest 按整条用例记为 `failed`，
+因此 4 条 NG 加 3 条 POK 共 7 条失败，与附录1 中的 NG 4 条、POK 3 条一一对应。
+
+附录状态分布：
+
+| 状态 | 数量 | 说明 |
+| --- | ---: | --- |
+| OK | 17 | 实际结果符合预期 |
+| POK | 3 | 常规文本断言通过、含词典未收录词的文本抛出 `KeyError`，属部分通过 |
+| NG | 4 | 数字与下划线被计入字母数、短句被忽略、音节统计抛出 `KeyError` |
+| NT | 0 | 本部分无用例标记为 NT |
+
+| 状态 | 用例 | 现象 |
+| --- | --- | --- |
+| POK | TC-A-014 | `syllable_count` 常规文本返回 11（通过），含 interoperability 的文本抛 `KeyError` |
+| POK | TC-A-017 | `difficult_words` 常规文本返回 0（通过），含未收录词文本抛 `KeyError` |
+| POK | TC-A-023 | `polysyllabcount` 常规文本返回 0（通过），含未收录词文本抛 `KeyError` |
+| NG | TC-A-005 | `letter_count("3 apples")` 返回 7（应 6）、`letter_count("hello_world")` 返回 11（应 10） |
+| NG | TC-A-011 | `sentence_count("Hello. World.")` 返回 1（应 2）、`sentence_count("One. Two. Three. Four. Five.")` 返回 1（应 5） |
+| NG | TC-A-013 | `syllable_count("In 2024 we win.")` 抛 `KeyError: '2024'` |
+| NG | TC-A-021 | `monosyllabcount("In 2024 we win.")` 抛 `KeyError: '2024'` |
+
+第二轮（修复缺陷 A1 ~ A3 后，全量执行）：
+
+```text
+24 passed
+```
+
+第三轮（与可读性指标用例合并后的全量运行）：计数与预处理 24 条全部通过；
+全量 44 条为 `4 failed, 39 passed, 1 skipped`，失败项均在 `metrics/` 下，
+由韩迎小按其缺陷记录继续处理（见上一节）。
+
+用例清单版本：v1.00 初稿 32 条 → v1.01 精简为 24 条（删除 2 条与其他函数重复的空字符串用例、
+合并 7 组重复输入用例）→ v1.02 保留全部缺陷相关用例并新增 `difficult_words` 音节阈值边界用例
+TC-A-024，明细见 `../test_cases/test_cases.xlsx` 的修订记录。
+
 ## 用例与脚本对照（韩迎小：可读性指标）
 
 韩迎小共 20 条用例，覆盖 16 项可读性指标函数及句数依赖边界。
