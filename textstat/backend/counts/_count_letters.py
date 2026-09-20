@@ -21,8 +21,6 @@ def count_letters(text: str) -> int:
         The number of letters in text.
 
     """
-    # Ignore spaces
-    text = re.sub(r"\s", "", text)
-    # 数字与下划线同属 \w，但不是字母，需一并剔除
-    text = re.sub(r"[\d_]", "", text)
-    return len(remove_punctuation(text, rm_apostrophe=True))
+    # 只统计拉丁字母：剔除空格、标点、数字、下划线，以及汉字等非拉丁字符
+    # （\w 会保留数字、下划线与 CJK 字符，因此不能用 [^\w\s] 判字母）
+    return len(re.sub(r"[^A-Za-z\u00C0-\u024F\u1E00-\u1EFF]", "", text))
