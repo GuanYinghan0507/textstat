@@ -20,4 +20,6 @@ def reading_time(text: str, ms_per_char: float) -> float:
     float
         The reading time for `text`.
     """
+    if ms_per_char < 0:
+        raise ValueError("ms_per_char must be non-negative")
     return ms_per_char * count_chars(text, ignore_spaces=True) / 1000

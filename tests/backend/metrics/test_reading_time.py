@@ -23,3 +23,8 @@ from .. import resources
 )
 def test_reading_time(text: str, ms_per_char: float, expected: float) -> None:
     assert round(metrics.reading_time(text, ms_per_char), 3) == expected
+
+
+def test_reading_time_rejects_negative_speed() -> None:
+    with pytest.raises(ValueError, match="ms_per_char"):
+        metrics.reading_time("abc", -1)

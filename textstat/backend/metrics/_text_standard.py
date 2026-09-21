@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 from collections import Counter
 
+from ..counts._count_sentences import count_sentences
 from ..utils._typed_cache import typed_cache
 from ._flesch_kincaid_grade import flesch_kincaid_grade
 from ._flesch_reading_ease import flesch_reading_ease
@@ -60,12 +61,13 @@ def text_standard(text: str, lang: str) -> float:
     else:
         grade.append(13)
 
-    # Appending SMOG Index
-    score = smog_index(text, lang)
-    lower = math.floor(score)
-    upper = math.ceil(score)
-    near = round(score)
-    grade.extend([lower, upper, near])
+    # SMOG is only meaningful for samples of at least three sentences.
+    if count_sentences(text) >= 3:
+        score = smog_index(text, lang)
+        lower = math.floor(score)
+        upper = math.ceil(score)
+        near = round(score)
+        grade.extend([lower, upper, near])
 
     # Appending Coleman_Liau_Index
     score = coleman_liau_index(text)

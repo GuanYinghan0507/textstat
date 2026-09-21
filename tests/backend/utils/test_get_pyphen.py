@@ -19,3 +19,8 @@ from textstat.backend import utils
 )
 def test_get_pyphen(lang: str) -> None:
     assert isinstance(utils.get_pyphen(lang), Pyphen)
+
+
+def test_get_pyphen_reports_unsupported_language() -> None:
+    with pytest.raises(ValueError, match="xx_XX"):
+        utils.get_pyphen("xx_XX")
